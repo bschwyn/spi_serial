@@ -1,5 +1,6 @@
 import mraa as m
 import time
+import glob
 
 
 class SpiSerial():
@@ -24,7 +25,10 @@ class SpiSerial():
         self.cs0.dir(m.DIR_OUT)
         self.cs0.write(1)
 
-        self.dev = m.spiFromDesc(self.SPI_FROM_DESC)
+        if glob.glob("/dev/spi*"):
+            self.dev = m.spi(0)
+        else:
+            self.dev = m.spiFromDesc(self.SPI_FROM_DESC)
         self.dev.frequency(62500)
         self.dev.mode(m.SPI_MODE0)
         self.dev.bitPerWord(8)
