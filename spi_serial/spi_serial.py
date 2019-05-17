@@ -26,7 +26,7 @@ class SpiSerial():
         self.cs0.write(1)
 
         if glob.glob("/dev/spi*"):
-            self.dev = m.spi(0)
+            self.dev = m.Spi(0)
         else:
             self.dev = m.spiFromDesc(self.SPI_FROM_DESC)
         self.dev.frequency(62500)
